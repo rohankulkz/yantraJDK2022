@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.driveSystems;
 * */
 
 @TeleOp(name="Drive-Train", group="Drive")
-@Disabled
+//@Disabled
 public class testOpMode extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -50,16 +50,20 @@ public class testOpMode extends LinearOpMode{
 
         while(opModeIsActive()) {
             //Assigns the turing movement
-            double turn = gamepad1.left_stick_x;
+            double turn = gamepad1.right_stick_x;
 
             motorValues = driveSystems.turnDrive(turn);
 
             //Note: These movements override the turning as they cannot go at the same time yet
             //Assigns the strafing movement
-            double x = gamepad1.right_stick_x;
-            double y = gamepad1.right_stick_y;
+            double x = -gamepad1.left_stick_x;
+            double y = gamepad1.left_stick_y;
 
             motorValues = driveSystems.continousDriveWithCoords(x,y);
+
+            if(x == 0 && y ==0){
+                motorValues = driveSystems.turnDrive(gamepad1.right_stick_x);
+            }
 
 
 
