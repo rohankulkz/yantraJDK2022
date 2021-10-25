@@ -58,6 +58,8 @@ public class testOpMode extends LinearOpMode{
             //Assigns the strafing movement
             double x = -gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
+            
+            //Driver Note: Strafing always overrides turn so do not attempt both at once.
 
             motorValues = driveSystems.continousDriveWithCoords(x,y);
 
