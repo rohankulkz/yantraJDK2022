@@ -34,6 +34,8 @@ public class servoIntakeOpMode extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "rearrightd");
         leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
         rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
+        leftIntakeDraw.scaleRange(0,1);
+        rightIntakeDraw.scaleRange(0,1);
 
         //Activate OpMode and robot movement
         waitForStart();
@@ -61,7 +63,8 @@ public class servoIntakeOpMode extends LinearOpMode {
 
             boolean changed3 = false; //Outside of loop()
             if(gamepad1.a && !changed3) {
-                leftIntakeDraw.setPosition(0.2);
+                leftIntakeDraw.setPosition(1.5);
+                //rightIntakeDraw.setPosition(0.2);
 
             }
             else if(!gamepad1.a) changed3 = false;
