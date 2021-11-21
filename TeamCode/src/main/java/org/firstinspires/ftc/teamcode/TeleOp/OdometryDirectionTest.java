@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.util.Encoder;
+
 
 /*
  * This is a test opmode
@@ -22,6 +24,10 @@ public class OdometryDirectionTest extends LinearOpMode{
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+
+    private Encoder leftOdometer = null;
+    private Encoder rightOdometer = null;
+    private Encoder frontOdometer = null;
 
 
 
