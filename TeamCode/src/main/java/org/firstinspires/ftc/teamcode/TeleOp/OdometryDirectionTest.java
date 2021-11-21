@@ -4,10 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.teamcode.driveSystems;
 
 
 /*
@@ -16,9 +13,9 @@ import org.firstinspires.ftc.teamcode.driveSystems;
  * Meant for changing motor directions to put correct configurations in roadrunner
  */
 
-@TeleOp(name="MotorPowerTest", group="Drive")
+@TeleOp(name="OdometryDirectionTest", group="Drive")
 //@Disabled
-public class MotorPowerTest extends LinearOpMode{
+public class OdometryDirectionTest extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor frontLeft = null;
@@ -44,16 +41,7 @@ public class MotorPowerTest extends LinearOpMode{
 
 
         while(opModeIsActive()) {
-            //change to ensure robot drives straight in a forwards direction
-            frontLeft.setDirection(DcMotorEx.Direction.REVERSE);
-            frontRight.setDirection(DcMotorEx.Direction.FORWARD);
-            backLeft.setDirection(DcMotorEx.Direction.REVERSE);
-            backRight.setDirection(DcMotorEx.Direction.FORWARD);
-
-            frontLeft.setPower(0.5);
-            frontRight.setPower(0.5);
-            backLeft.setPower(0.5);
-            backRight.setPower(0.5);
+            // test encoder directions to ensure all odometers return correct values
 
 
 

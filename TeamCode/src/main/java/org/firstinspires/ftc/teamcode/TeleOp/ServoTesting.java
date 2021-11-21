@@ -33,8 +33,8 @@ public class ServoTesting extends LinearOpMode {
 
 
         while(opModeIsActive()) {
-            leftIntakeDraw.setDirection(Servo.Direction.FORWARD);
-            rightIntakeDraw.setDirection(Servo.Direction.FORWARD);
+//            leftIntakeDraw.setDirection(Servo.Direction.FORWARD);
+//            rightIntakeDraw.setDirection(Servo.Direction.FORWARD);
             ArrayList<Double> positions = new ArrayList<Double>();
             positions.add(0.2);
             positions.add(0.4);
@@ -47,7 +47,7 @@ public class ServoTesting extends LinearOpMode {
                 //update telemetry
                 telemetry.addData("Servo intake position", leftIntakeDraw.getPosition());
                 telemetry.update();
-                sleep(300);
+                sleep(3000);
 
 
 

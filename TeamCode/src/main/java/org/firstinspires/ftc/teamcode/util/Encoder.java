@@ -19,7 +19,7 @@ public class Encoder {
         return real;
     }
 
-    public enum Direction {
+    public enum  Direction {
         FORWARD(1),
         REVERSE(-1);
 

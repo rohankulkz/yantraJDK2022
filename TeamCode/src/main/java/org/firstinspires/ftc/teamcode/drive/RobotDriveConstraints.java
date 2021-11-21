@@ -32,6 +32,7 @@ public class RobotDriveConstraints {
      * from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = false;
+    // GET MORE INFO ON THIS LATER
     public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
             getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
 
@@ -44,8 +45,10 @@ public class RobotDriveConstraints {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 1.476378; // in
+    // MAY BE DIFFERENT, CALCULATE LATER
     public static double GEAR_RATIO = 3.5/1.0; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 1; // in
+    // EMPIRICALLY TUNE THIS LATER
+    public static double TRACK_WIDTH = 17.7; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -67,7 +70,8 @@ public class RobotDriveConstraints {
 
     // max rpm = 81.16811988
     //80% = 64.9344959
-    // tune max velcoity using maxveloicitytuner opmode later
+    // TUNE THESE LATER FOR BETTER ACCURACY
+
     public static double MAX_VEL = 64.9344959;
     public static double MAX_ACCEL = 64.9344959;
     // tune later through experimentation
