@@ -45,10 +45,10 @@ public class MotorPowerTest extends LinearOpMode{
 
         while(opModeIsActive()) {
             //change to ensure robot drives straight in a forwards direction
-            frontLeft.setDirection(DcMotorEx.Direction.REVERSE);
-            frontRight.setDirection(DcMotorEx.Direction.FORWARD);
-            backLeft.setDirection(DcMotorEx.Direction.REVERSE);
-            backRight.setDirection(DcMotorEx.Direction.FORWARD);
+            frontLeft.setDirection(DcMotorEx.Direction.FORWARD);
+            frontRight.setDirection(DcMotorEx.Direction.REVERSE);
+            backLeft.setDirection(DcMotorEx.Direction.FORWARD);
+            backRight.setDirection(DcMotorEx.Direction.REVERSE);
 
             frontLeft.setPower(0.5);
             frontRight.setPower(0.5);
