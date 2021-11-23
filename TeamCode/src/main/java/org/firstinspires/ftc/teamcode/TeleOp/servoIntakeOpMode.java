@@ -18,6 +18,7 @@ public class servoIntakeOpMode extends LinearOpMode {
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+    private DcMotor intake = null;
     private Servo leftIntakeDraw = null;
     private Servo rightIntakeDraw = null;
 
@@ -34,8 +35,11 @@ public class servoIntakeOpMode extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "rearrightd");
         leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
         rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
+        intake = hardwareMap.get(DcMotor.class,"intake");
         leftIntakeDraw.scaleRange(0,1);
         rightIntakeDraw.scaleRange(0,1);
+        //leftIntakeDraw.setDirection(Servo.Direction.FORWARD);
+        //rightIntakeDraw.setDirection(Servo.Direction.REVERSE);
 
         //Activate OpMode and robot movement
         waitForStart();
@@ -47,7 +51,7 @@ public class servoIntakeOpMode extends LinearOpMode {
 
         while(opModeIsActive()) {
             //update telemetry
-            telemetry.addData("Servo intake Postion", leftIntakeDraw.getPosition());
+            telemetry.addData("Servo intake Postion, Left", rightIntakeDraw.getPosition());
             telemetry.update();
             //Assigns the turing movement
 
@@ -58,16 +62,22 @@ public class servoIntakeOpMode extends LinearOpMode {
 
 
 
-           // boolean off = gamepad1.b;
+            // boolean off = gamepad1.b;
 
 
             boolean changed3 = false; //Outside of loop()
-            if(gamepad1.a && !changed3) {
-                leftIntakeDraw.setPosition(1.5);
-                //rightIntakeDraw.setPosition(0.2);
+            if(gamepad1.a) {
+                leftIntakeDraw.setPosition(0.4);
+                rightIntakeDraw.setPosition(0.6);
+                intake.setPower(1);
 
             }
-            else if(!gamepad1.a) changed3 = false;
+            if(gamepad1.b) {
+                leftIntakeDraw.setPosition(1);
+                rightIntakeDraw.setPosition(0);
+                intake.setPower(0);
+
+            }
 
 
 
@@ -78,7 +88,7 @@ public class servoIntakeOpMode extends LinearOpMode {
             //Note: These movements override the turning as they cannot go at the same time yet
             //Assigns the strafing movement
             double x = -gamepad1.left_stick_x;
-            double y = gamepad1.left_stick_y;
+            double y = -gamepad1.left_stick_y;
 
             //Driver Note: Strafing always overrides turn so do not attempt both at once.
 
