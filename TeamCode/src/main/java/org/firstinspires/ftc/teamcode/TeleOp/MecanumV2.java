@@ -15,6 +15,7 @@ public class MecanumV2 extends LinearOpMode {
     RobotMecanumDrive drive = new RobotMecanumDrive(hardwareMap);
     private Servo leftIntakeDraw = null;
     private Servo rightIntakeDraw = null;
+    private DcMotor intake = null;
 
 
 
@@ -32,12 +33,24 @@ public class MecanumV2 extends LinearOpMode {
             telemetry.update();
 
 
-            if(gamepad1.a){
-                if(leftIntakeDraw.getPosition()==0.66){
-                    leftIntakeDraw.setPosition(0.0);
-                }else{
-                    leftIntakeDraw.setPosition(0.66);
-                }
+//            if(gamepad1.a){
+//                if(leftIntakeDraw.getPosition()==0.66){
+//                    leftIntakeDraw.setPosition(0.0);
+//                }else{
+//                    leftIntakeDraw.setPosition(0.66);
+//                }
+//
+//            }
+            if(gamepad1.a) {
+                leftIntakeDraw.setPosition(0.4);
+                rightIntakeDraw.setPosition(0.6);
+                intake.setPower(1);
+
+            }
+            if(gamepad1.b) {
+                leftIntakeDraw.setPosition(1);
+                rightIntakeDraw.setPosition(0);
+                intake.setPower(0);
 
             }
         }
