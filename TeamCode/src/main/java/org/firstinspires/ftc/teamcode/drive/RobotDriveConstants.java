@@ -75,8 +75,9 @@ public class RobotDriveConstants {
     public static double MAX_VEL = 64.9344959;
     public static double MAX_ACCEL = 64.9344959;
     // tune later through experimentation
-    public static double MAX_ANG_VEL = Math.toRadians(180);
-    public static double MAX_ANG_ACCEL = Math.toRadians(180);
+    //180 BY DEFAULT
+    public static double MAX_ANG_VEL = Math.toRadians(40);
+    public static double MAX_ANG_ACCEL = Math.toRadians(30);
 
 
     public static double encoderTicksToInches(double ticks) {
