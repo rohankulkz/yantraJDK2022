@@ -24,6 +24,12 @@ public class servoIntakeOpMode extends LinearOpMode {
 
     private double[] motorValues = {0,0,0,0};
 
+    private boolean aChanged = false;
+    private boolean passA = false;
+
+    //0 means up, 1 means down
+    private int servoState = 0;
+
 
     @Override
     public void runOpMode(){
@@ -62,22 +68,37 @@ public class servoIntakeOpMode extends LinearOpMode {
 
 
 
-            // boolean off = gamepad1.b;
-
-
-            boolean changed3 = false; //Outside of loop()
-            if(gamepad1.a) {
-                leftIntakeDraw.setPosition(0.4);
-                rightIntakeDraw.setPosition(0.6);
-                intake.setPower(1);
-
+            if(gamepad1.a == passA){
+                aChanged = false;
             }
-            if(gamepad1.b) {
-                leftIntakeDraw.setPosition(1);
-                rightIntakeDraw.setPosition(0);
-                intake.setPower(0);
-
+            else{
+                aChanged = true;
             }
+
+            passA = gamepad1.a;
+
+
+
+            if(aChanged && gamepad1.a) {
+                if(servoState == 0){
+                    leftIntakeDraw.setPosition(1);
+                    rightIntakeDraw.setPosition(0);
+                    intake.setPower(0);
+                    servoState = 1;
+                }
+                else{
+                    leftIntakeDraw.setPosition(0.4);
+                    rightIntakeDraw.setPosition(0.6);
+                    intake.setPower(-1);
+                    servoState = 0;
+                }
+            }
+
+            //if(gamepad1.b) {
+            //    leftIntakeDraw.setPosition(1);
+            //    rightIntakeDraw.setPosition(0);
+            //    intake.setPower(0);
+            //}
 
 
 
