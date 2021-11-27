@@ -31,7 +31,7 @@ public class RobotStandardTrackingWheelLocalizer extends ThreeTrackingWheelLocal
     public static double TICKS_PER_REV = 8192;
     public static double WHEEL_RADIUS = 1.77165; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
-    public static double LATERAL_DISTANCE = 7.7; // in; distance between the left and right wheels
+    public static double LATERAL_DISTANCE = 6.97; // in; distance between the left and right wheels
     //find the middle of the 4 wheels to get the center of rotation
     public static double FORWARD_OFFSET = -3.0; // in; offset of the lateral wheel
 

@@ -10,7 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.internal.system.Misc;
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+//import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.RobotMecanumDrive;
 import org.firstinspires.ftc.teamcode.util.LoggingUtil;
 import org.firstinspires.ftc.teamcode.util.RegressionUtil;
 
@@ -35,18 +36,18 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.rpmToVelocity;
 @Autonomous(group = "drive")
 public class AutomaticFeedforwardTuner extends LinearOpMode {
     public static double MAX_POWER = 0.7;
-    public static double DISTANCE = 100; // in
+    public static double DISTANCE = 24; // in
 
     @Override
     public void runOpMode() throws InterruptedException {
-        if (RUN_USING_ENCODER) {
-            RobotLog.setGlobalErrorMsg("Feedforward constants usually don't need to be tuned " +
-                    "when using the built-in drive motor velocity PID.");
-        }
+//        if (RUN_USING_ENCODER) {
+//            RobotLog.setGlobalErrorMsg("Feedforward constants usually don't need to be tuned " +
+//                    "when using the built-in drive motor velocity PID.");
+//        }
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        RobotMecanumDrive drive = new RobotMecanumDrive(hardwareMap);
 
         NanoClock clock = NanoClock.system();
 
