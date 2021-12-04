@@ -14,13 +14,13 @@ import org.firstinspires.ftc.teamcode.driveSystems;
 public class servoIntakeOpMode extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor frontLeft = hardwareMap.get(DcMotor.class, "frontleftd");
-    private DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontrightd");
-    private DcMotor backLeft = hardwareMap.get(DcMotor.class, "rearleftd");
-    private DcMotor backRight = hardwareMap.get(DcMotor.class, "rearrightd");;
-    private DcMotor intake = hardwareMap.get(DcMotor.class,"intake");;
-    private Servo leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
-    private Servo rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
+    private DcMotor frontLeft = null;
+    private DcMotor frontRight = null;
+    private DcMotor backLeft = null;
+    private DcMotor backRight = null;
+    private DcMotor intake = null;
+    private Servo leftIntakeDraw = null;
+    private Servo rightIntakeDraw = null;
 
     private double[] motorValues = {0,0,0,0};
 
@@ -44,8 +44,8 @@ public class servoIntakeOpMode extends LinearOpMode {
 
     //Linear Extension motor and servo
 
-    private DcMotor linearExtension = hardwareMap.get(DcMotor.class, "intake");
-    private Servo linearServo = hardwareMap.get(Servo.class, "intakeServo");
+    private DcMotor linearExtension = null;
+    private Servo linearServo = null;
 
 
     @Override
@@ -60,6 +60,19 @@ public class servoIntakeOpMode extends LinearOpMode {
         //Activate OpMode and robot movement
         waitForStart();
         runtime.reset();
+
+
+
+        frontLeft = hardwareMap.get(DcMotor.class, "frontleftd");
+                frontRight = hardwareMap.get(DcMotor.class, "frontrightd");
+                        backRight = hardwareMap.get(DcMotor.class, "rearrightd");;
+                                backLeft = hardwareMap.get(DcMotor.class, "rearleftd");
+                                intake = hardwareMap.get(DcMotor.class,"intake");;
+                                leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
+                                rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
+                                linearExtension = hardwareMap.get(DcMotor.class, "intake");
+                                linearServo = hardwareMap.get(Servo.class, "intakeServo");
+
 
 
 
@@ -123,6 +136,8 @@ public class servoIntakeOpMode extends LinearOpMode {
                     linearServo.setPosition(1);
                     servoStateLinear = 0;
                 }
+
+
             }
 
 
@@ -146,7 +161,7 @@ public class servoIntakeOpMode extends LinearOpMode {
             frontRight.setPower(motorValues[1]);
             backLeft.setPower(motorValues[2]);
             backRight.setPower(motorValues[3]);
-            intake.setPower(gamepad2.left_stick_y);
+            linearExtension.setPower(gamepad2.left_stick_y);
 
         }
     }
