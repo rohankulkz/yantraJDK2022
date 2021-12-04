@@ -52,8 +52,7 @@ public class servoIntakeOpMode extends LinearOpMode {
     public void runOpMode(){
         //Pending Motor names
         //Motor hardware map
-        leftIntakeDraw.scaleRange(0,1);
-        rightIntakeDraw.scaleRange(0,1);
+
         //leftIntakeDraw.setDirection(Servo.Direction.FORWARD);
         //rightIntakeDraw.setDirection(Servo.Direction.REVERSE);
 
@@ -72,6 +71,10 @@ public class servoIntakeOpMode extends LinearOpMode {
                                 rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
                                 linearExtension = hardwareMap.get(DcMotor.class, "intake");
                                 linearServo = hardwareMap.get(Servo.class, "intakeServo");
+
+
+        leftIntakeDraw.scaleRange(0,1);
+        rightIntakeDraw.scaleRange(0,1);
 
 
 
