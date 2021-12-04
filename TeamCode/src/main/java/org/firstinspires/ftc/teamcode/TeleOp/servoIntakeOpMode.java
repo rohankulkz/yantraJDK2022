@@ -69,8 +69,8 @@ public class servoIntakeOpMode extends LinearOpMode {
                                 intake = hardwareMap.get(DcMotor.class,"intake");;
                                 leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
                                 rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
-                                linearExtension = hardwareMap.get(DcMotor.class, "intake");
-                                linearServo = hardwareMap.get(Servo.class, "intakeServo");
+                                linearExtension = hardwareMap.get(DcMotor.class, "linear");
+                                linearServo = hardwareMap.get(Servo.class, "linearServo");
 
 
         leftIntakeDraw.scaleRange(0,1);
