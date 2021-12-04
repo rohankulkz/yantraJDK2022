@@ -14,34 +14,44 @@ import org.firstinspires.ftc.teamcode.driveSystems;
 public class servoIntakeOpMode extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor frontLeft = null;
-    private DcMotor frontRight = null;
-    private DcMotor backLeft = null;
-    private DcMotor backRight = null;
-    private DcMotor intake = null;
-    private Servo leftIntakeDraw = null;
-    private Servo rightIntakeDraw = null;
+    private DcMotor frontLeft = hardwareMap.get(DcMotor.class, "frontleftd");
+    private DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontrightd");
+    private DcMotor backLeft = hardwareMap.get(DcMotor.class, "rearleftd");
+    private DcMotor backRight = hardwareMap.get(DcMotor.class, "rearrightd");;
+    private DcMotor intake = hardwareMap.get(DcMotor.class,"intake");;
+    private Servo leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
+    private Servo rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
 
     private double[] motorValues = {0,0,0,0};
 
+
+     //servo toggles for A.
     private boolean aChanged = false;
     private boolean passA = false;
-
     //0 means up, 1 means down
     private int servoState = 0;
+
+
+
+    //Servo toggles for Intake Drop  (Controller 2 A)
+
+    private boolean linearChanged = false;
+    private boolean passLinear = false;
+    //0 means up, 1 means down
+    private int servoStateLinear = 0;
+
+
+
+    //Linear Extension motor and servo
+
+    private DcMotor linearExtension = hardwareMap.get(DcMotor.class, "intake");
+    private Servo linearServo = hardwareMap.get(Servo.class, "intakeServo");
 
 
     @Override
     public void runOpMode(){
         //Pending Motor names
         //Motor hardware map
-        frontLeft = hardwareMap.get(DcMotor.class, "frontleftd");
-        frontRight = hardwareMap.get(DcMotor.class, "frontrightd");
-        backLeft = hardwareMap.get(DcMotor.class, "rearleftd");
-        backRight = hardwareMap.get(DcMotor.class, "rearrightd");
-        leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
-        rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
-        intake = hardwareMap.get(DcMotor.class,"intake");
         leftIntakeDraw.scaleRange(0,1);
         rightIntakeDraw.scaleRange(0,1);
         //leftIntakeDraw.setDirection(Servo.Direction.FORWARD);
@@ -67,15 +77,24 @@ public class servoIntakeOpMode extends LinearOpMode {
             motorValues = driveSystems.turnDrive(turn);
 
 
-
+//Logic for toddle gamepade1 a
             if(gamepad1.a == passA){
                 aChanged = false;
             }
             else{
                 aChanged = true;
             }
-
             passA = gamepad1.a;
+
+//Logic for toggle gamepad2.a
+
+            if(gamepad2.a == passLinear){
+                linearChanged = false;
+            }
+            else{
+                linearChanged = true;
+            }
+            passLinear = gamepad2.a;
 
 
 
@@ -94,16 +113,17 @@ public class servoIntakeOpMode extends LinearOpMode {
                 }
             }
 
-            //if(gamepad1.b) {
-            //    leftIntakeDraw.setPosition(1);
-            //    rightIntakeDraw.setPosition(0);
-            //    intake.setPower(0);
-            //}
 
-
-
-
-
+            if(linearChanged && gamepad2.a){
+                if(servoStateLinear == 0){
+                    linearServo.setPosition(0);
+                    servoStateLinear = 1;
+                }
+                else{
+                    linearServo.setPosition(1);
+                    servoStateLinear = 0;
+                }
+            }
 
 
             //Note: These movements override the turning as they cannot go at the same time yet
@@ -126,10 +146,8 @@ public class servoIntakeOpMode extends LinearOpMode {
             frontRight.setPower(motorValues[1]);
             backLeft.setPower(motorValues[2]);
             backRight.setPower(motorValues[3]);
+            intake.setPower(gamepad2.left_stick_y);
 
         }
     }
-
-
-
 }
