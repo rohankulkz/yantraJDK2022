@@ -230,6 +230,8 @@ public class mecanumV3 extends LinearOpMode implements Runnable {
                 }
             }
 
+            telemetry.update();
+
 
 
 

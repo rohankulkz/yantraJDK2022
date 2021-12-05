@@ -85,15 +85,17 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
 
-@Disabled
-@TeleOp(name="Concept: Gamepad Rumble", group ="Concept")
+@TeleOp(name="ps4Rumble", group ="Drive")
 public class ps4Rumble extends LinearOpMode{
     boolean lastRumble = false;
     boolean halfMark = false;
     boolean endgameMark = false;
-    double halftime = 60.0;
-    double endGameWarning = 80.0;
-    double endGame = 90.0;
+    double halftime = 5.0;
+    double endGameWarning = 5.0;
+    double endGame = 10.0;
+    double lastTime;
+    double now;
+    double deltaTime=0;
     // endgame starts at 90 sec
     // controller rumbles at 80 sec
     ElapsedTime runtime = new ElapsedTime();
@@ -104,32 +106,35 @@ public class ps4Rumble extends LinearOpMode{
 
         waitForStart();
         runtime.reset();
+//        while(opModeIsActive()){
+//            if(!endgameMark){
+//                while (runtime.seconds()>=endGameWarning && runtime.seconds()<=endGame){
+//                    gamepad1.rumbleBlips(4);
+//                }
+//            }
 
-        while(opModeIsActive()){
-            if(!halfMark){
-                telemetry.addData(">", "Halftime Alert Countdown: %3.0f Sec \n", (halftime - runtime.seconds()) );
-            }
+
+
+
             if(!endgameMark){
-                telemetry.addData(">", "EndGame Alert Countdown: %3.0f Sec \n", (endGame - runtime.seconds()) );
-            }
-            if(runtime.seconds()==halftime){
-                gamepad1.rumbleBlips(2);
-                gamepad2.rumbleBlips(2);
-            }else{
-                if(!halfMark){
-                    halfMark=true;
+                if(runtime.seconds()>=80){
+                    lastTime = runtime.seconds();
+                    while(deltaTime<=10.0){
+                        gamepad1.rumbleBlips(3);
+                        now=runtime.seconds()   ;
+                        deltaTime = now-lastTime;
                 }
+                    endgameMark=true;
+            }
 
             }
-            if(runtime.seconds()>=endGameWarning && runtime.seconds()<=endGame){
-                gamepad1.rumbleBlips(3);
-                gamepad2.rumbleBlips(3);
-            }
-            else{
-               if(!endgameMark){
-                   endgameMark=true;
-               }
-            }
+
+
+
+
+
+
+
 
 
 
@@ -149,8 +154,6 @@ public class ps4Rumble extends LinearOpMode{
 
     }
 
-
-    }
 
 
 
