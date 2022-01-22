@@ -23,6 +23,7 @@ public class servoIntakeOpMode extends LinearOpMode {
     private Servo leftIntakeDraw = null;
     private Servo rightIntakeDraw = null;
     private Servo internalservo = null;
+    private DcMotor duck = null;
 
     private double[] motorValues = {0,0,0,0};
 
@@ -30,6 +31,11 @@ public class servoIntakeOpMode extends LinearOpMode {
      //servo toggles for A.
     private boolean aChanged = false;
     private boolean passA = false;
+
+
+    private boolean dChanged = false;
+    private boolean passd = false;
+
     //0 means up, 1 means down
     private int servoState = 0;
 
@@ -81,6 +87,7 @@ public class servoIntakeOpMode extends LinearOpMode {
                                 internalservo = hardwareMap.get(Servo.class, "internalservo");
 
                                 internalservo.setDirection(Servo.Direction.REVERSE);
+                                duck = hardwareMap.get(DcMotor.class, "duck");
 
 
         leftIntakeDraw.scaleRange(0,1);
@@ -113,6 +120,18 @@ public class servoIntakeOpMode extends LinearOpMode {
                 aChanged = true;
             }
             passA = gamepad1.a;
+
+
+
+            //Logic for toddle gamepade1 a
+            if(gamepad1.left_bumper == passA){
+                dChanged = false;
+            }
+            else{
+                dChanged = true;
+            }
+            passd = gamepad1.a= gamepad1.left_bumper;
+
 
 //Logic for toggle gamepad2.a
 
@@ -160,6 +179,28 @@ public class servoIntakeOpMode extends LinearOpMode {
                     rightIntakeDraw.setPosition(0.6);
                     
                     servoState = 0;
+                }
+            }
+
+
+            if(dChanged && gamepad1.left_bumper) {
+                if(servoState == 0){
+                    //Up position
+                    //Set Internal Servo to not be destroyed
+                    //internalservo.setPosition(0.7);
+
+
+                    duck.setPower(1);
+                }
+                else{
+                    //down position
+
+                    //Set Internal Servo to not be destroyed
+                    //internalservo.setPosition(0.7);
+
+
+
+                    duck.setPower(-1);
                 }
             }
 
