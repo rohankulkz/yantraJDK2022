@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -21,6 +22,7 @@ public class servoIntakeOpMode extends LinearOpMode {
     private DcMotor intake = null;
     private Servo leftIntakeDraw = null;
     private Servo rightIntakeDraw = null;
+    private Servo internalservo = null;
 
     private double[] motorValues = {0,0,0,0};
 
@@ -39,6 +41,11 @@ public class servoIntakeOpMode extends LinearOpMode {
     private boolean passLinear = false;
     //0 means up, 1 means down
     private int servoStateLinear = 0;
+
+    //Servo toggles for internal Servo
+    private boolean internalservoChanged = false;
+    private boolean passinternalservo = false;
+    private int internalservoState = 0;
 
 
 
@@ -66,15 +73,20 @@ public class servoIntakeOpMode extends LinearOpMode {
                 frontRight = hardwareMap.get(DcMotor.class, "frontrightd");
                         backRight = hardwareMap.get(DcMotor.class, "rearrightd");;
                                 backLeft = hardwareMap.get(DcMotor.class, "rearleftd");
-                                intake = hardwareMap.get(DcMotor.class,"intake");;
+                                intake = hardwareMap.get(DcMotor.class,"intake");
                                 leftIntakeDraw = hardwareMap.get(Servo.class,"iservoleft");
                                 rightIntakeDraw = hardwareMap.get(Servo.class,"iservoright");
                                 linearExtension = hardwareMap.get(DcMotor.class, "linear");
                                 linearServo = hardwareMap.get(Servo.class, "linearServo");
+                                internalservo = hardwareMap.get(Servo.class, "internalservo");
+
+                                internalservo.setDirection(Servo.Direction.REVERSE);
 
 
         leftIntakeDraw.scaleRange(0,1);
         rightIntakeDraw.scaleRange(0,1);
+        intake.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
 
 
@@ -104,40 +116,83 @@ public class servoIntakeOpMode extends LinearOpMode {
 
 //Logic for toggle gamepad2.a
 
-            if(gamepad2.a == passLinear){
+            if(gamepad1.b == passLinear){
                 linearChanged = false;
             }
             else{
                 linearChanged = true;
             }
-            passLinear = gamepad2.a;
+            passLinear = gamepad1.b;
+
+//logic for toggle gamepad1.right_bumper
+            if(gamepad1.right_bumper == passinternalservo){
+                internalservoChanged = false;
+            }
+            else{
+                internalservoChanged = true;
+            }
+            passinternalservo = gamepad1.right_bumper;
+
 
 
 
             if(aChanged && gamepad1.a) {
                 if(servoState == 0){
-                    leftIntakeDraw.setPosition(1);
-                    rightIntakeDraw.setPosition(0);
+                    //Up position
+                    //Set Internal Servo to not be destroyed
+                    //internalservo.setPosition(0.7);
+
+
+                    leftIntakeDraw.setPosition(0.9);
+                    rightIntakeDraw.setPosition(0.1);
                     intake.setPower(0);
                     servoState = 1;
                 }
                 else{
+                    //down position
+
+                    //Set Internal Servo to not be destroyed
+                    //internalservo.setPosition(0.7);
+
+
+
                     leftIntakeDraw.setPosition(0.4);
                     rightIntakeDraw.setPosition(0.6);
-                    intake.setPower(-1);
+                    
                     servoState = 0;
                 }
             }
 
+            float rev = gamepad1.right_trigger;
 
-            if(linearChanged && gamepad2.a){
+            intake.setPower(-rev);
+
+            if(linearChanged && gamepad1.b){
                 if(servoStateLinear == 0){
-                    linearServo.setPosition(0);
+                    linearServo.setPosition(0.0);
                     servoStateLinear = 1;
+                    telemetry.addData("Position: ", linearServo.getPosition());
                 }
                 else{
-                    linearServo.setPosition(1);
+                    telemetry.addData("Position: ", linearServo.getPosition());
+                    linearServo.setPosition(0.9
+                    );
                     servoStateLinear = 0;
+                }
+
+
+            }
+
+            if(internalservoChanged && gamepad1.right_bumper){
+                if(internalservoState == 0){
+                    //in position
+                    internalservo.setPosition(0.25);
+                    internalservoState = 1;
+                }
+                else{
+                    //out position
+                    internalservo.setPosition(0.5);
+                    internalservoState = 0;
                 }
 
 
@@ -164,7 +219,18 @@ public class servoIntakeOpMode extends LinearOpMode {
             frontRight.setPower(motorValues[1]);
             backLeft.setPower(motorValues[2]);
             backRight.setPower(motorValues[3]);
-            linearExtension.setPower(gamepad2.left_stick_y);
+
+
+            //Linear Extension
+            if(gamepad1.dpad_up){
+                    linearExtension.setPower(1);
+        }
+            else if (gamepad1.dpad_down){
+                linearExtension.setPower(-1);
+            }
+            else{
+                linearExtension.setPower((0));
+            }
 
         }
     }

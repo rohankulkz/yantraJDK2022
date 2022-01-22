@@ -63,7 +63,7 @@ public class driveSystems {
         
         */
         
-     double[] motorValues = {x_turn_value,x_turn_value,x_turn_value,x_turn_value};
+     double[] motorValues = {x_turn_value*0.7,x_turn_value*0.7,x_turn_value*0.7,x_turn_value*0.7};
 
      return motorValues;
     }
