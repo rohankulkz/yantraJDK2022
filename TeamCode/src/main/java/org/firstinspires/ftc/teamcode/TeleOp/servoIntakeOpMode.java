@@ -130,7 +130,7 @@ public class servoIntakeOpMode extends LinearOpMode {
             else{
                 dChanged = true;
             }
-            passd = gamepad1.a= gamepad1.left_bumper;
+            passd = gamepad1.left_bumper;
 
 
 //Logic for toggle gamepad2.a
