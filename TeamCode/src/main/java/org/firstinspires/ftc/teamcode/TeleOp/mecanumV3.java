@@ -8,10 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.R;
-import org.firstinspires.ftc.teamcode.drive.RobotMecanumDrive;
-import org.firstinspires.ftc.teamcode.driveSystems;
-
 @TeleOp(name="mecanumV3", group="Drive")
 //@Disabled
 public class mecanumV3 extends LinearOpMode implements Runnable {

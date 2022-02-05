@@ -24,12 +24,6 @@ public class MeepMeepTesting {
                                 .forward(30)
                                 .turn(Math.toRadians(90))
                                 .forward(30)
-                                .addDisplacementMarker(() -> {
-                                    /* Everything in the marker callback should be commented out */
-
-                                    // bot.shooter.shoot()
-                                    // bot.wobbleArm.lower()
-                                })
                                 .turn(Math.toRadians(90))
                                 .splineTo(new Vector2d(10, 15), 0)
                                 .turn(Math.toRadians(90))
